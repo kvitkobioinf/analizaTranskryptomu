@@ -1,0 +1,6 @@
+while IFS='' read -r line || [[ -n "$line" ]]; do
+AR=${line};
+echo ${AR};
+echo "*** Pobieranie: ${AR}";
+fastq-dump -X 1000 ${AR} --split-files
+done < $1
