@@ -1,0 +1,1 @@
+Pobieranie SRA run: fastq-dump --outdir "" SRA123456 --split-files
