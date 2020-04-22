@@ -31,7 +31,8 @@ do
     if ! (($i % 2)); then
       echo
       echo "Pracuje na $SRA_wejsciowe"
-      java -jar $trimmomatic PE $SRA_wejsciowe $SRA_wyjsciowe SLIDINGWINDOW:4:30 TRAILING:30 ILLUMINACLIP:$wejscie/$adapter:2:30:5
+      # java -jar $trimmomatic PE $SRA_wejsciowe $SRA_wyjsciowe SLIDINGWINDOW:4:30 TRAILING:30 ILLUMINACLIP:$wejscie/$adapter:2:30:5
+      java -jar $trimmomatic PE $SRA_wejsciowe $SRA_wyjsciowe ILLUMINACLIP:$wejscie/$adapter:2:30:5 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15
       SRA_wejsciowe=""
       SRA_wyjsciowe=""
     fi

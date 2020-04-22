@@ -21,8 +21,8 @@ Automatyzacja trimmomatic:  auto_trimmomatic.sh -h
 
 Zadanie 4.
 
-    ./auto_trimmomatic.sh -i "SRA_FILES/RAW" -o "SRA_FILES/trimmomatic" -e "fastq" -a "illuminaAdapter.fasta" -t "/home/ksenia/miniconda3/share/trimmomatic-0.39-1/trimmomatic.jar"
+    ./auto_trimmomatic.sh -i "SRA_FILES/RAW" -o "SRA_FILES/trimmomatic_1" -e "fastq" -a "illuminaAdapter.fasta" -t "/home/ksenia/miniconda3/share/trimmomatic-0.39-1/trimmomatic.jar"
 
 
-
-    ./auto_fastqc.sh -i "SRA_FILES/trimmomatic" -o "analiza_jakosci/3_trimmamatic_wszystkieParametry" -e "fq"
+Analiza jakości dla przetworzonych plików
+    ./auto_fastqc.sh -i "SRA_FILES/trimmomatic_1" -o "analiza_jakosci/trimmomatic_1/" -e "fq"
