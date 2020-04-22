@@ -28,12 +28,11 @@ do
     SRA_wyjsciowe="$SRA_wyjsciowe ${wyjscie}/${plik%.*}_trimmed.fq"
     SRA_wyjsciowe="$SRA_wyjsciowe ${wyjscie}/${plik%.*}_unpaired.fq"
     ((i=i+1))
-    echo $i
     if ! (($i % 2)); then
+      echo
       echo "Pracuje na $SRA_wejsciowe"
+      java -jar $trimmomatic PE $SRA_wejsciowe $SRA_wyjsciowe SLIDINGWINDOW:4:30 TRAILING:30 ILLUMINACLIP:$wejscie/$adapter:2:30:5
       SRA_wejsciowe=""
       SRA_wyjsciowe=""
     fi
 done
-
-# java -jar $trimmomatic PE $SRA_wejsciowe $SRA_wyjsciowe SLIDINGWINDOW:4:30 TRAILING:30 ILLUMINACLIP:$wejscie/$adapter:2:30:5
