@@ -6,7 +6,7 @@ while getopts i:o:e:a:t:h option; do
     e) ext=$OPTARG;;
     a) adapter=$OPTARG;;
     t) trimmomatic=$OPTARG;;
-    h) echo "-i folder wejscia, -o folder wyjscia, -e rozszerzenie pliku, -a plik adaptera, -t lokalizacja pliku java trimmonatic (do znalezienia przez which trimmomatic)"
+    h) echo "-i folder wejscia, -o folder wyjscia, -e rozszerzenie pliku, -a plik adaptera (bez folderu), -t lokalizacja pliku java trimmonatic (do znalezienia przez which trimmomatic)"
        echo "FOLDERY BEZ! KONCZACEGO znaku /"
        exit;;
   esac
@@ -29,4 +29,4 @@ do
 done
 
 echo
-java -jar $trimmomatic PE $SRA_wejsciowe $SRA_wyjsciowe ILLUMINACLIP:$wejscie/$adapter:2:30:5
+java -jar $trimmomatic PE $SRA_wejsciowe $SRA_wyjsciowe SLIDINGWINDOW:4:30 TRAILING:30 ILLUMINACLIP:$wejscie/$adapter:2:30:5
