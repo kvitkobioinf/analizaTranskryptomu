@@ -1,0 +1,14 @@
+Pobieranie SRA run: fastq-dump --outdir "SRA_FILES" SRR 519926 --split-files
+
+Analiza jakości:    fastqc -o zad_3/analiza_jakosci/1_ocena_wstepna/ zad_3/SRA_FILES/RAW/SRR519926_1.fastq
+Zautomatyzowana:    auto_fastqc.sh -h
+
+
+Instrukcja do Trimmomatic:  http://usadellab.org/cms/?page=trimmomatic
+
+Znalezienie lokalizacji pliku .jar Trimmomatic:     which trimmomatic
+Obecnie:                                            /home/ksenia/miniconda3/share/trimmomatic-0.39-1/trimmomatic.jar
+
+Wykorzystanie obecnych w folderze trimmomatic/adapter lub stworzenie własnego (jak w instrukcji do ćwiczeń)
+
+Automatyzacja trimmomatic:  auto_trimmomatic.sh -h
