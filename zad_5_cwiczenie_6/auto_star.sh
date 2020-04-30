@@ -28,7 +28,8 @@ do
       echo "Pracuje na $STAR_wejsciowe"
 
       # STAR --runThreadN 2 --runMode genomeGenerate --genomeDir $wyjscie --genomeFastaFiles $STAR_wejsciowe
-      /bioapp/STAR-2.7.3a/source/STAR --runThreadN 2 --runMode genomeGenerate --genomeDir $wyjscie --genomeFastaFiles $STAR_wejsciowe
+      # /bioapp/STAR-2.7.3a/source/STAR --runThreadN 2 --runMode genomeGenerate --genomeDir $wyjscie --genomeFastaFiles $STAR_wejsciowe
+      echo "STAR --runThreadN 2 --runMode genomeGenerate --genomeChrBinNbits 15 --genomeDir $wyjscie --genomeFastaFiles $STAR_wejsciowe"
 
       STAR_wejsciowe=""
     fi

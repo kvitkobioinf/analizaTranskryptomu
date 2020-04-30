@@ -1,3 +1,11 @@
+Proszę określić wartość parametru --genomeSAindexNbases, dla genomu o sekwencji podanej w pliku /Dydaktyka/sample_data/refs/22.fa (odpowiedź + numer indeksu wstawić jako plik tekstowy txt wraz informacjami: numer indeksu, imię i nazwisko).
+Proszę stworzyć skrypt, który wykona mapowanie dla wszystkich plików w folderze reads (/Dydaktyka/sample_data/) za pomocą programu STAR. Wyniki proszę zapisać w swoim katalogu domowym.
+Proszę zmapować wszystkie odczyty z katalogu reads (/Dydaktyak/sample_data/) do genomu ERCC92, znajdującego się w katalogu refs (/Dydaktyka/sampe_data/), za pomocą alignera hisat2. Wyniki proszę zapisać w swoim katalogu domowym.
+Program hisat2 zainstalowany jest w /bioapp/bin/
+
+
+
+
 Obliczanie dlugości sekwencji
 
 http://seqanswers.com/forums/showthread.php?t=36160
@@ -6,7 +14,7 @@ grep -v ">" 22.fa | wc | awk '{print $3-$1}'
 50818468
 
 w Google: log2(50818468)/2 - 1
-11.799424774 = 12
+11.799424774 ~~~ 11 (dawałem 12, ale sam program STAR gdy uruchomi się go bez parametru - z domyślną 14 - proponuje 11)
 
 
 
@@ -17,3 +25,14 @@ Fastq na Fasta
 
 https://www.researchgate.net/post/How_can_I_convert_FASTQ_to_FASTA_format
 sed -n '1~4s/^@/>/p;2~4p' in.fastq > out.fasta
+
+
+
+
+
+
+
+
+
+Być może rozwiązanie problemu z "terminate called after throwing an instance of 'std::bad_alloc'" w STAR
+https://github.com/alexdobin/STAR/issues/103#issuecomment-173009628
