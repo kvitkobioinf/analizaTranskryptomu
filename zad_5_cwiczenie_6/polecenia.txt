@@ -1,0 +1,19 @@
+Obliczanie dlugości sekwencji
+
+http://seqanswers.com/forums/showthread.php?t=36160
+
+grep -v ">" 22.fa | wc | awk '{print $3-$1}'
+50818468
+
+w Google: log2(50818468)/2 - 1
+11.799424774 = 12
+
+
+
+
+
+
+Fastq na Fasta
+
+https://www.researchgate.net/post/How_can_I_convert_FASTQ_to_FASTA_format
+sed -n '1~4s/^@/>/p;2~4p' in.fastq > out.fasta
