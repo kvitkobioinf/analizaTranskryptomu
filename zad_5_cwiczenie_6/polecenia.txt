@@ -16,7 +16,7 @@ grep -v ">" 22.fa | wc | awk '{print $3-$1}'
 w Google: log2(50818468)/2 - 1
 11.799424774 ~~~ 11 (dawałem 12, ale sam program STAR gdy uruchomi się go bez parametru - z domyślną 14 - proponuje 11)
 
-
+--genomeSAindexNbases min(14, log2(50818468)/2-1)
 
 
 
@@ -36,3 +36,7 @@ sed -n '1~4s/^@/>/p;2~4p' in.fastq > out.fasta
 
 Być może rozwiązanie problemu z "terminate called after throwing an instance of 'std::bad_alloc'" w STAR
 https://github.com/alexdobin/STAR/issues/103#issuecomment-173009628
+
+--genomeChrBinNbits min(18, log2(GenomeLength/NumberOfReferences))
+
+NumberOfReferences = grep "^>" Genome.fasta | wc -l
