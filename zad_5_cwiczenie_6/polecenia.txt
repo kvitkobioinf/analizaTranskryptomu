@@ -40,3 +40,21 @@ https://github.com/alexdobin/STAR/issues/103#issuecomment-173009628
 --genomeChrBinNbits min(18, log2(GenomeLength/NumberOfReferences))
 
 NumberOfReferences = grep "^>" Genome.fasta | wc -l
+
+
+
+
+Udane ręczne uruchomienie STAR
+(base) ksenia@Surface-Ksenia:/mnt/c/Users/Ksenia/Documents/Analiza transkryptomu/analizaTranskryptomu1-4/analizaTranskryptomu/zad_5_cwiczenie_6$ STAR --runThreadN 2 --runMode genomeGenerate --genomeChrBinNbits 15 --genomeDir done --genomeFastaFiles  reads_fasta/HBR_1_R1.fa reads_fasta/HBR_1_R2.fa
+May 01 01:40:07 ..... started STAR run
+May 01 01:40:07 ... starting to generate Genome files
+May 01 01:45:14 ... starting to sort Suffix Array. This may take a long time...
+May 01 02:01:08 ... sorting Suffix Array chunks and saving them to disk...
+May 01 02:05:00 ... loading chunks from disk, packing SA...
+May 01 02:06:40 ... finished generating suffix array
+May 01 02:06:40 ... generating Suffix Array index
+May 01 02:07:31 ... completed Suffix Array index
+May 01 02:07:32 ... writing Genome to disk ...
+May 01 02:09:10 ... writing Suffix Array to disk ...
+May 01 02:09:12 ... writing SAindex to disk
+May 01 02:09:31 ..... finished successfully
