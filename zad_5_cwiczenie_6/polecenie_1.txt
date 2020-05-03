@@ -2,7 +2,7 @@ Kseniia Kvitko, 119494
 --genomeSAindexNbases 11
 
 
-Dla genomu o sekwencji podanej w pliku /Dydaktyka/sample_data/refs/22.fa proponuję parametr
+Dla genomu o sekwencji podanej w pliku /Dydaktyka/sample_data/refs/22.fa
 
 Obliczanie dlugości sekwencji 22.fa
 grep -v ">" 22.fa | wc | awk '{print $3-$1}'
@@ -10,5 +10,5 @@ grep -v ">" 22.fa | wc | awk '{print $3-$1}'
 
 log2(50818468)/2-1 = 11.799424774 ~~~ 11
 
-Uzyskana liczba jest mniejsza od 14 (dlatego została wybrana), została zaokrąglona do liczby całkowitej poprzez odrzucenie części dziesiętnych ("matematycznie zaokrąglona" byłaby do 12), spójnie również z propozycją samego programu STAR
+Uzyskana liczba jest mniejsza od 14 (dlatego została wybrana), została zaokrąglona do liczby całkowitej poprzez odrzucenie części dziesiętnych ("matematycznie zaokrąglona" byłaby do 12) - spójnie również z propozycją samego programu STAR
 

@@ -1,4 +1,4 @@
-Pobieranie SRA run: fastq-dump --outdir "SRA_FILES" SRR 519926 --split-files
+Pobieranie SRA run: fastq-dump --outdir "SRA_FILES" SRR519926 --split-files
 
 Analiza jakości:    fastqc -o zad_3/analiza_jakosci/1_ocena_wstepna/ zad_3/SRA_FILES/RAW/SRR519926_1.fastq
 Zautomatyzowana:    auto_fastqc.sh -h
