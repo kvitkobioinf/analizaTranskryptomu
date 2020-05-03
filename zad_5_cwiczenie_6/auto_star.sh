@@ -45,7 +45,6 @@ do
       if [ "$base" -gt "$const" ]; then                                                       
         base=14                                                                            
       fi                                                                                   
-      echo $"SAindexNbases to: $base"
 
       NumberOfReferences=$(grep "^>" ${wejcie}${p} | wc -l)
       NumberOfReferences=$(expr $seqLength / $NumberOfReferences)

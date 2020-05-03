@@ -34,8 +34,7 @@ do
     if ! (($i % 2)); then
       echo
       echo "Pracuje na $STAR_wejsciowe"
-
-      mkdir $wyjscie/${plik%.*}             
+           
       seqLength=$(grep -v ">" ${wejcie}${p} | wc | awk '{print $3-$1}')                      
       echo "Dlugosc to: $seqLength"                                                      
       log=$(log2 $seqLength)                                                               
@@ -44,14 +43,13 @@ do
       const=14                                                                                     
       if [ "$base" -gt "$const" ]; then                                                       
         base=14                                                                            
-      fi                                                                                   
-      echo $"SAindexNbases to: $base"
+      fi
 
-      echo "/bioapp/STAR-2.7.3a/source/STAR --runThreadN 2 --genomeSAindexNbases $base --genomeDir $wyjscie --readFilesIn $STAR_wejsciowe"
-      echo "mv $wyjscie/Aligned.out.sam $wyjscie/${plik%.*}.sam"
-      echo "/bioapp/samtools-1.9/samtools view -Sb -@ 2 $wyjscie/${plik%.*}.sam > $wyjscie/${plik%.*}.bam"
-      echo "/bioapp/samtools-1.9/samtools sort $wyjscie/${plik%.*}.bam -o $wyjscie/${plik%.*}_sorted.bam"
-      echo "/bioapp/samtools-1.9/samtools index $wyjscie/${plik%.*}_sorted.bam"
+      /bioapp/STAR-2.7.3a/source/STAR --runThreadN 2 --genomeDir $wyjscie --readFilesIn $STAR_wejsciowe
+      mv Aligned.out.sam $wyjscie/${plik%.*}.sam
+      /bioapp/samtools-1.9/samtools view -Sb -@ 2 $wyjscie/${plik%.*}.sam > $wyjscie/${plik%.*}.bam
+      /bioapp/samtools-1.9/samtools sort $wyjscie/${plik%.*}.bam -o $wyjscie/${plik%.*}_sorted.bam
+      /bioapp/samtools-1.9/samtools index $wyjscie/${plik%.*}_sorted.bam
 
       STAR_wejsciowe=""
     fi
