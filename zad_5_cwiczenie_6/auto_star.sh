@@ -35,9 +35,9 @@ do
       echo
       echo "Pracuje na $STAR_wejsciowe"
 
-      mkdir $wyjscie/${plik%.*}             
-      seqLength=$(grep -v ">" ${wejcie}${p} | wc | awk '{print $3-$1}')                      
-      echo "Dlugosc to: $seqLength"                                                      
+      mkdir $wyjscie/${plik%.*}
+                   
+      seqLength=$(grep -v ">" ${wejcie}${p} | wc | awk '{print $3-$1}')
       log=$(log2 $seqLength)                                                               
       base=$(expr $log / 2)                                                                  
       base=$(expr $base - 1)
@@ -47,7 +47,15 @@ do
       fi                                                                                   
       echo $"SAindexNbases to: $base"
 
-      /bioapp/STAR-2.7.3a/source/STAR --runThreadN 2 --genomeSAindexNbases $base --runMode genomeGenerate --genomeDir $wyjscie/${plik%.*} --genomeFastaFiles $STAR_wejsciowe
+      NumberOfReferences=$(grep "^>" ${wejcie}${p} | wc -l)
+      NumberOfReferences=$(expr $seqLength / $NumberOfReferences)
+      NumberOfReferences=$(log2 $NumberOfReferences)
+      const=18                                                                                     
+      if [ "$NumberOfReferences" -gt "$const" ]; then                                                       
+        NumberOfReferences=18                                                                           
+      fi
+
+      /bioapp/STAR-2.7.3a/source/STAR --runThreadN 2 --genomeSAindexNbases $base --genomeChrBinNbits $NumberOfReferences --runMode genomeGenerate --genomeDir $wyjscie/${plik%.*} --genomeFastaFiles $STAR_wejsciowe
 
       STAR_wejsciowe=""
     fi

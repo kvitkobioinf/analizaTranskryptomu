@@ -47,7 +47,11 @@ do
       fi                                                                                   
       echo $"SAindexNbases to: $base"
 
-      /bioapp/STAR-2.7.3a/source/STAR --runThreadN 2 --genomeSAindexNbases $base --genomeDir $wyjscie/${plik%.*} --genomeFastaFiles $STAR_wejsciowe
+      echo "/bioapp/STAR-2.7.3a/source/STAR --runThreadN 2 --genomeSAindexNbases $base --genomeDir $wyjscie --readFilesIn $STAR_wejsciowe"
+      echo "mv $wyjscie/Aligned.out.sam $wyjscie/${plik%.*}.sam"
+      echo "/bioapp/samtools-1.9/samtools view -Sb -@ 2 $wyjscie/${plik%.*}.sam > $wyjscie/${plik%.*}.bam"
+      echo "/bioapp/samtools-1.9/samtools sort $wyjscie/${plik%.*}.bam -o $wyjscie/${plik%.*}_sorted.bam"
+      echo "/bioapp/samtools-1.9/samtools index $wyjscie/${plik%.*}_sorted.bam"
 
       STAR_wejsciowe=""
     fi
