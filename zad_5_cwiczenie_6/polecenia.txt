@@ -35,21 +35,6 @@ Fastq na Fasta
 https://www.researchgate.net/post/How_can_I_convert_FASTQ_to_FASTA_format
 sed -n '1~4s/^@/>/p;2~4p' in.fastq > out.fasta
 
-____________________________________________________________
-
-Proszę zmapować wszystkie odczyty z katalogu reads (/Dydaktyak/sample_data/) do genomu ERCC92, znajdującego się w katalogu refs (/Dydaktyka/sampe_data/), za pomocą alignera hisat2. Wyniki proszę zapisać w swoim katalogu domowym.
-Program hisat2 zainstalowany jest w /bioapp/bin/
-
-
-
-
-
-
-
-
-
-
-
 
 Być może rozwiązanie problemu z "terminate called after throwing an instance of 'std::bad_alloc'" w STAR
 https://github.com/alexdobin/STAR/issues/103#issuecomment-173009628
@@ -75,3 +60,23 @@ May 01 02:07:32 ... writing Genome to disk ...
 May 01 02:09:10 ... writing Suffix Array to disk ...
 May 01 02:09:12 ... writing SAindex to disk
 May 01 02:09:31 ..... finished successfully
+
+
+
+
+
+
+
+
+
+
+____________________________________________________________
+
+Proszę zmapować wszystkie odczyty z katalogu reads (/Dydaktyak/sample_data/) do genomu ERCC92, znajdującego się w katalogu refs (/Dydaktyka/sampe_data/), za pomocą alignera hisat2. Wyniki proszę zapisać w swoim katalogu domowym.
+Program hisat2 zainstalowany jest w /bioapp/bin/
+
+
+
+/bioapp/bin/hisat2 -q -x nazwa_indeksu_bez_rozszerzenia -1 pierwszy_plik_R1.fq -2 drugi_plik_R2.fq -S /SAM/nazwa_pliku.sam
+
+samtools view -Sb -@ 2 SAM/nazwa_pliku.sam > BAM/nazwa_pliku.bam
