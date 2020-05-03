@@ -1,0 +1,3 @@
+Trzeba korzystać z plików utworzonych w zadaniu poprzednim - ja dałem do odpowiednich katalogów, więc program auto_star.sh uruchomić muszę dla każdego z katalogów (nie chciało mi się inaczej)
+
+./auto_star.sh -i "reads/HBR_2_R2" -o "reads/HBR_2_R2" -e "fq"
