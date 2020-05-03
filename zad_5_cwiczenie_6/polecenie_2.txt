@@ -1,0 +1,11 @@
+Program STAR oczekuje plików FASTA, nie FASTQ:
+
+EXITING because of INPUT ERROR: the file format of the genomeFastaFile: reads/HBR_1_R1.fq is not fasta: the first character is '@' (64), not '>'.                                                                
+Solution: check formatting of the fasta file. Make sure the file is uncompressed (unzipped).
+
+Przekonwertowano pliki na pliki FASTA za pomocą skryptu auto_fastqToFasta.sh
+
+
+
+Próbując zmappować pliki otrzymujemy błąd programu STAR "terminate called after throwing an instance of 'std::bad_alloc'"
+Problem nie jest obecny dla pliku chromosomu 22.fa zademonstrowanego na ćwiczeniach

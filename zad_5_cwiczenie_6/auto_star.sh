@@ -16,6 +16,14 @@ echo "Znaleziono plikow: $iloscPlikow"
 
 STAR_wejsciowe=""
 
+function log2 {
+    local x=0
+    for (( y=$1-1 ; $y > 0; y >>= 1 )) ; do
+        let x=$x+1
+    done
+    echo $x
+}
+
 pliki=$wejscie/*.$ext
 i=0
 for p in $pliki
@@ -27,9 +35,19 @@ do
       echo
       echo "Pracuje na $STAR_wejsciowe"
 
-      # STAR --runThreadN 2 --runMode genomeGenerate --genomeDir $wyjscie --genomeFastaFiles $STAR_wejsciowe
-      # /bioapp/STAR-2.7.3a/source/STAR --runThreadN 2 --runMode genomeGenerate --genomeDir $wyjscie --genomeFastaFiles $STAR_wejsciowe
-      echo "STAR --runThreadN 2 --runMode genomeGenerate --genomeChrBinNbits 15 --genomeDir $wyjscie --genomeFastaFiles $STAR_wejsciowe"
+      mkdir $wyjscie/${plik%.*}             
+      seqLength=$(grep -v ">" ${wejcie}${p} | wc | awk '{print $3-$1}')                      
+      echo "Dlugosc to: $seqLength"                                                      
+      log=$(log2 $seqLength)                                                               
+      base=$(expr $log / 2)                                                                  
+      base=$(expr $base - 1)
+      const=14                                                                                     
+      if [ "$base" -gt "$const" ]; then                                                       
+        base=14                                                                            
+      fi                                                                                   
+      echo $"SAindexNbases to: $base"
+
+      /bioapp/STAR-2.7.3a/source/STAR --runThreadN 2 --genomeSAindexNbases $base --runMode genomeGenerate --genomeChrBinNbits 15 --genomeDir $wyjscie/${plik%.*} --genomeFastaFiles $STAR_wejsciowe
 
       STAR_wejsciowe=""
     fi

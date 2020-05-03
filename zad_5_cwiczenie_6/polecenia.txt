@@ -1,10 +1,17 @@
+Znaki nowej linii z Windows na Linux
+https://askubuntu.com/a/305001
+sed -i -e 's/\r$//' auto_star.sh
+
+
+
+
+
+
+
+
+
+
 Proszę określić wartość parametru --genomeSAindexNbases, dla genomu o sekwencji podanej w pliku /Dydaktyka/sample_data/refs/22.fa (odpowiedź + numer indeksu wstawić jako plik tekstowy txt wraz informacjami: numer indeksu, imię i nazwisko).
-Proszę stworzyć skrypt, który wykona mapowanie dla wszystkich plików w folderze reads (/Dydaktyka/sample_data/) za pomocą programu STAR. Wyniki proszę zapisać w swoim katalogu domowym.
-Proszę zmapować wszystkie odczyty z katalogu reads (/Dydaktyak/sample_data/) do genomu ERCC92, znajdującego się w katalogu refs (/Dydaktyka/sampe_data/), za pomocą alignera hisat2. Wyniki proszę zapisać w swoim katalogu domowym.
-Program hisat2 zainstalowany jest w /bioapp/bin/
-
-
-
 
 Obliczanie dlugości sekwencji
 
@@ -19,12 +26,22 @@ w Google: log2(50818468)/2 - 1
 --genomeSAindexNbases min(14, log2(50818468)/2-1)
 
 
+___________________________________________________________
 
+Proszę stworzyć skrypt, który wykona mapowanie dla wszystkich plików w folderze reads (/Dydaktyka/sample_data/) za pomocą programu STAR. Wyniki proszę zapisać w swoim katalogu domowym.
 
 Fastq na Fasta
 
 https://www.researchgate.net/post/How_can_I_convert_FASTQ_to_FASTA_format
 sed -n '1~4s/^@/>/p;2~4p' in.fastq > out.fasta
+
+____________________________________________________________
+
+Proszę zmapować wszystkie odczyty z katalogu reads (/Dydaktyak/sample_data/) do genomu ERCC92, znajdującego się w katalogu refs (/Dydaktyka/sampe_data/), za pomocą alignera hisat2. Wyniki proszę zapisać w swoim katalogu domowym.
+Program hisat2 zainstalowany jest w /bioapp/bin/
+
+
+
 
 
 

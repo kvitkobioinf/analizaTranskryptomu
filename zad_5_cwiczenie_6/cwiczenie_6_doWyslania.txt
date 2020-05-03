@@ -1,5 +1,0 @@
-Kseniia Kvitko, 119494
-
-log2(50818468)/2-1 = 11.799424774 ~~~ 11
-
---genomeSAindexNbases 12
