@@ -47,7 +47,7 @@ do
       fi                                                                                   
       echo $"SAindexNbases to: $base"
 
-      /bioapp/STAR-2.7.3a/source/STAR --runThreadN 2 --genomeSAindexNbases $base --runMode genomeGenerate --genomeDir $wyjscie/${plik%.*} --genomeFastaFiles $STAR_wejsciowe
+      /bioapp/STAR-2.7.3a/source/STAR --runThreadN 2 --genomeSAindexNbases $base --genomeDir $wyjscie/${plik%.*} --genomeFastaFiles $STAR_wejsciowe
 
       STAR_wejsciowe=""
     fi
