@@ -1,3 +1,11 @@
 Trzeba korzystać z plików utworzonych w zadaniu poprzednim - ja dałem do odpowiednich katalogów, więc program auto_star.sh uruchomić muszę dla każdego z katalogów (nie chciało mi się inaczej)
 
 ./auto_star.sh -i "reads/HBR_2_R2" -o "reads/HBR_2_R2" -e "fq"
+
+
+Zad2
+Proszę utworzyć plik z id odczytów w których przy mapowaniu występują insercje (mapowanie STAR)
+
+/bioapp/samtools-1.9/samtools view reads/UHR_3_R2/UHR_3_R2.bam | awk '{print $6}' | grep "I"
+
+Musiały zostać źle zmapowane w pkt. 1, bo nie znajduje żadnych insersji. Są tylko 100M i różny udział S (soft clipping)
