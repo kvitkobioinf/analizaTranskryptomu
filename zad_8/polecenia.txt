@@ -1,0 +1,3 @@
+/bioapp/subread-2.0.0-source/bin/featureCounts -a /Dydaktyka/sample_data/refs/22.gtf -g gene_name -o counts_22.txt ~/BAM_indeks/BAM_FILES/*.bam
+
+/bioapp/subread-2.0.0-source/bin/featureCounts -a /Dydaktyka/sample_data/refs/ERCC92.gtf -g gene_name -o counts_ERCC92.txt ~/BAM_indeks/BAM_FILES/*.bam
