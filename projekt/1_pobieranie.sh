@@ -23,5 +23,5 @@ rm -r ~/ncbi 2> /dev/null
 # konwersja plików SRA na odpowiednie pliki fastq (metoda szybsza niż pobranie plików formatu fastq bezpośrednio przez fastq-dump
 for file in PRJNA313294_SRA/*.sra
 do
-	fasterq-dump ${file}
+	nohup fasterq-dump ${file} &
 done
