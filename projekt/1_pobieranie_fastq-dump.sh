@@ -10,6 +10,15 @@ sed -i 's/\t/\n/g' SRR_Acc_List.txt
 # usuwanie folderu ncbi w katalogu domowym (domyślna lokalizacja pobierania plików SRA przez program prefetch) jeśli wcześniej istniał (jeśli nie istniał - ignorowanie informacji o błędzie)
 rm -r ~/ncbi 2> /dev/null
 
+while IFS='' read -r line || [[ -n "$line" ]]; do
+	AR=${line};
+	echo ${AR};
+	echo "*** Pobieranie: ${AR}";
+	fastq-dump ${AR} --split-files
+done < "SRR_Acc_List.txt"
+
+return
+
 # pobranie plików SRA z listy w pliku tekstowym
 prefetch $(<SRR_Acc_List.txt)
 
