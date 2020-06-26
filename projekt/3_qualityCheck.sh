@@ -1,8 +1,13 @@
 #!/bin/bash
 
-mkdir qualityChecks
+directory="FASTQ"
+if [ $# -gt 0 ]; then
+	directory=$1
+fi
 
-for fastq_file in ./FASTQ/*.fastq
+mkdir qualityChecks 2>/dev/null
+
+for fastq_file in ./${directory}/*.fastq
 do
 	nohup fastqc ${fastq_file} -o qualityChecks >/dev/null 2>&1 &
 done
