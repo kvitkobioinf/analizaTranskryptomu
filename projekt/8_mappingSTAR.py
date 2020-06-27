@@ -23,3 +23,6 @@ for fastq_file in fastq_files:
         os.system(f'cd STAR_mapped/{run.replace("_1", "")}')
         os.system(f'nohup /bioapp/STAR-2.7.3a/source/STAR --runThreadN 6 --genomeDir ../../STAR_index --readFilesIn ../../{fastq_file} >/dev/null 2>&1 &')
         os.system(f'cd ../../')
+
+print('Informacje o postępie')
+print('ps -ef | grep 119494 | grep STAR-2.7 | wc -l')
