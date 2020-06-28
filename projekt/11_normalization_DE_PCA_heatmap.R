@@ -4,23 +4,31 @@ library(ComplexHeatmap)
 
 SRAruns <- c("SRR3191542", "SRR3191543", "SRR3191544", "SRR3191545", "SRR3194428", "SRR3194429", "SRR3194430", "SRR3194431")
 SRAitems <- c("Mock1-1", "Mock2-1", "ZIKV1-1", "ZIKV2-1", "Mock1-2", "Mock2-2", "ZIKV1-2", "ZIKV2-2")
-SRAdevices <- c(rep("Illumina MiSeq", times = 4), rep("NextSeq 500", times = 4))
+SRAdevices <- c(rep("Illumina MiSeq", times = 4), rep("Illumina NextSeq 500", times = 4))
 SRAshortcuts <- c("M1_MiSeq", "M2_MiSeq", "Z1_MiSeq", "Z2_MiSeq", "M1_NextSeq", "M2_NextSeq", "Z1_NextSeq", "Z2_NextSeq")
 
 SRAdata <- rbind(SRAruns, SRAitems, SRAdevices, SRAshortcuts)
 print(SRAdata)
 
-counts <- read.delim("~/projekt/analizaTranskryptomu/projekt/hg19/COUNTS/counts_ALL.txt", comment.char="#")
-colnames(counts)[7:14] <- SRAshortcuts
+counts_all <- read.delim("~/projekt/analizaTranskryptomu/projekt/hg19/COUNTS/counts_ALL.txt", comment.char="#")
+colnames(counts_all)[7:14] <- SRAshortcuts
 
-dds <- function(data) {
-  countData <- data[,7:14]
+counts_paired <- read.delim("~/projekt/analizaTranskryptomu/projekt/hg19/COUNTS/counts_PE.txt", comment.char="#")
+colnames(counts_paired)[7:10] <- SRAshortcuts[1:4]
+
+counts_single <- read.delim("~/projekt/analizaTranskryptomu/projekt/hg19/COUNTS/counts_SE.txt", comment.char="#")
+colnames(counts_single)[7:10] <- SRAshortcuts[5:8]
+
+dds <- function(data, runs) {
+  countData <- data[,7:(7+runs-1)]
   rownames(countData) = data$Geneid
   samples <- names(countData)
-  cond_1 <- rep("cond1", 4)
-  cond_2 <- rep("cond2", 4)
-  condition <- factor(c(cond_1, cond_2))
-  condition <- factor(c("m", "m", "z", "z", "m", "m", "z", "z"))
+  if(runs > 4) {
+    condition <- factor(c("mock", "mock", "zika", "zika", "mock", "mock", "zika", "zika"))
+  }
+  else {
+    condition <- factor(c("mock", "mock", "zika", "zika"))
+  }
   colData <- data.frame(samples = samples, condition = condition)
   dds <- DESeqDataSetFromMatrix(countData = countData, colData = colData, design = ~condition)
   
@@ -42,9 +50,11 @@ analyseDE = function(data) {
   return(dds)
 }
 
-DE <- analyseDE(dds(counts))
+DE_all <- analyseDE(dds(counts_all, 8))
+DE_paired <- analyseDE(dds(counts_paired, 4))
+DE_single <- analyseDE(dds(counts_single, 4))
 
-PCAnalysis <- function(data) {
+PCAnalysis <- function(data, runs) {
   gene_data <- data[7:14]
   rownames(gene_data) <- data$Geneid
   
@@ -66,7 +76,7 @@ PCAnalysis <- function(data) {
   
 }
 
-PCAnalysis(counts)
+PCAnalysis(counts_all)
 
 normalize <- function(data) {
   log_data <- rlog(data)
@@ -97,4 +107,4 @@ drawHeatmap <- function(data){
           row_names_gp=gpar(cex = 0.8))
 }
 
-drawHeatmap(normalize(dds(counts)))
+drawHeatmap(normalize(dds(counts_all, 8)))
