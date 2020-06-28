@@ -5,7 +5,7 @@ library(ComplexHeatmap)
 SRAruns <- c("SRR3191542", "SRR3191543", "SRR3191544", "SRR3191545", "SRR3194428", "SRR3194429", "SRR3194430", "SRR3194431")
 SRAitems <- c("Mock1-1", "Mock2-1", "ZIKV1-1", "ZIKV2-1", "Mock1-2", "Mock2-2", "ZIKV1-2", "ZIKV2-2")
 SRAdevices <- c(rep("Illumina MiSeq", times = 4), rep("Illumina NextSeq 500", times = 4))
-SRAshortcuts <- c("M1_MiSeq", "M2_MiSeq", "Z1_MiSeq", "Z2_MiSeq", "M1_NextSeq", "M2_NextSeq", "Z1_NextSeq", "Z2_NextSeq")
+SRAshortcuts <- c("Mock_1_MiSeq", "Mock_2_MiSeq", "ZIKA_1_MiSeq", "ZIKA_2_MiSeq", "Mock_1_NextSeq", "Mock_2_NextSeq", "ZIKA_1_NextSeq", "ZIKA_2_NextSeq")
 
 SRAdata <- rbind(SRAruns, SRAitems, SRAdevices, SRAshortcuts)
 print(SRAdata)
@@ -76,7 +76,9 @@ PCAnalysis <- function(data, runs) {
   
 }
 
-PCAnalysis(counts_all)
+counts_all_display <- counts_all
+colnames(counts_all_display)[7:14] <- c("M1_Mi", "M2_Mi", "Z1_Mi", "Z2_Mi", "M1_Next", "M2_Next", "Z1_Next", "Z2_Next")
+PCAnalysis(counts_all_display)
 
 normalize <- function(data) {
   log_data <- rlog(data)
@@ -87,19 +89,17 @@ normalize <- function(data) {
 }
 
 drawHeatmap <- function(data){
-  threshold <- 10
+  threshold <- 14.5
   data <- data[
-      data$M1_MiSeq > threshold | 
-      data$M2_MiSeq > threshold | 
-      data$Z1_MiSeq > threshold | 
-      data$Z2_MiSeq > threshold | 
-      data$M1_NextSeq > threshold | 
-      data$M2_NextSeq > threshold |
-      data$Z1_NextSeq > threshold |
-      data$Z2_NextSeq > threshold
+    data$Mock_1_MiSeq > threshold | 
+      data$Mock_2_MiSeq > threshold | 
+      data$ZIKA_1_MiSeq > threshold | 
+      data$ZIKA_2_MiSeq > threshold | 
+      data$Mock_1_NextSeq > threshold | 
+      data$Mock_2_NextSeq > threshold |
+      data$ZIKA_1_NextSeq > threshold |
+      data$ZIKA_2_NextSeq > threshold
     , ]
-  data <- data.frame(data$M1_MiSeq, data$M2_MiSeq, data$M1_NextSeq, data$M2_NextSeq, data$Z1_NextSeq, data$Z2_NextSeq, data$Z1_MiSeq, data$Z2_MiSeq)
-  names(data) = c(SRAshortcuts[1], SRAshortcuts[2], SRAshortcuts[5], SRAshortcuts[6], SRAshortcuts[3], SRAshortcuts[4], SRAshortcuts[7], SRAshortcuts[8])
   
   Heatmap(data , cluster_columns = FALSE,
           row_names_side = "left",
@@ -107,4 +107,6 @@ drawHeatmap <- function(data){
           row_names_gp=gpar(cex = 0.8))
 }
 
-drawHeatmap(normalize(dds(counts_all, 8)))
+data_for_heatmap <- normalize(dds(counts_all, 8))
+data_reordered <- data_for_heatmap[c(0,1,2,5,6,3,4,7,8)]
+drawHeatmap(data_reordered)
