@@ -13,14 +13,6 @@ print(SRAdata)
 counts <- read.delim("~/projekt/analizaTranskryptomu/projekt/hg19/COUNTS/counts_ALL.txt", comment.char="#")
 colnames(counts)[7:14] <- SRAshortcuts
 
-normalize <- function(data) {
-  log_data <- rlog(data)
-  normalized_data<- assay(log_data)
-  normalized_data <- as.data.frame(normalized_data)
-  
-  return(normalized_data)
-}
-
 dds <- function(data) {
   countData <- data[,7:14]
   rownames(countData) = data$Geneid
@@ -28,6 +20,7 @@ dds <- function(data) {
   cond_1 <- rep("cond1", 4)
   cond_2 <- rep("cond2", 4)
   condition <- factor(c(cond_1, cond_2))
+  condition <- factor(c("m", "m", "z", "z", "m", "m", "z", "z"))
   colData <- data.frame(samples = samples, condition = condition)
   dds <- DESeqDataSetFromMatrix(countData = countData, colData = colData, design = ~condition)
   
@@ -49,7 +42,7 @@ analyseDE = function(data) {
   return(dds)
 }
 
-analyseDE(dds(counts))
+DE <- analyseDE(dds(counts))
 
 PCAnalysis <- function(data) {
   gene_data <- data[7:14]
@@ -74,6 +67,14 @@ PCAnalysis <- function(data) {
 }
 
 PCAnalysis(counts)
+
+normalize <- function(data) {
+  log_data <- rlog(data)
+  normalized_data<- assay(log_data)
+  normalized_data <- as.data.frame(normalized_data)
+  
+  return(normalized_data)
+}
 
 drawHeatmap <- function(data){
   threshold <- 10
